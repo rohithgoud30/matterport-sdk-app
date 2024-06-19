@@ -36,26 +36,6 @@ Before running the project, you need to set up the environment files.
      };
      ```
 
-3. **Ensure Environment Files Are Ignored**:
-
-   - Add the environment files to your `.gitignore` to ensure they are not committed to version control:
-
-     ```gitignore
-     # Environment files
-     src/environments/environment.ts
-     src/environments/environment.prod.ts
-     ```
-
-   - Optionally, you can keep template files for the environment files in version control and document how to copy and configure them:
-
-     ```bash
-     cp src/environments/environment.ts.template src/environments/environment.ts
-     cp src/environments/environment.prod.ts.template src/environments/environment.prod.ts
-     ```
-
-4. **Document Environment Setup in README**:
-   - Include instructions in the README for developers to set up their environment files before running the project.
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
