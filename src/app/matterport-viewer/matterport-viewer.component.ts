@@ -1,4 +1,3 @@
-// src/app/matterport-viewer/matterport-viewer.component.ts
 import {
   Component,
   Input,
@@ -45,6 +44,7 @@ export class MatterportViewerComponent implements OnInit, OnChanges {
     }
 
     try {
+      this.clearViewer();
       this.clearError();
       const container = '#matterport-container';
       const { sdk, error } = await this.matterportService.initializeSdk(
@@ -71,6 +71,15 @@ export class MatterportViewerComponent implements OnInit, OnChanges {
   clearError() {
     this.errorMessage = null;
     this.removeErrorElement();
+  }
+
+  clearViewer() {
+    const container = this.el.nativeElement.querySelector(
+      '#matterport-container'
+    );
+    if (container) {
+      container.innerHTML = '';
+    }
   }
 
   createErrorElement() {
