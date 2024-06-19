@@ -1,13 +1,26 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatterportViewerComponent } from './matterport-viewer/matterport-viewer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule, FormsModule, MatterportViewerComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'matterport-sdk-app';
+  title = 'angular-matterport';
+  inputSpaceId: string = '';
+  spaceId: string = '';
+
+  submitSpaceId() {
+    if (!this.inputSpaceId) {
+      alert('Space ID is mandatory. Please enter a valid Space ID.');
+    } else {
+      this.spaceId = this.inputSpaceId;
+    }
+  }
 }
