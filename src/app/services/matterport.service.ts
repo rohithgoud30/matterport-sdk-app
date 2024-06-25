@@ -1,4 +1,3 @@
-// src/app/services/matterport.service.ts
 import { Injectable } from '@angular/core';
 import { setupSdk, MpSdk } from '@matterport/sdk';
 import { environment } from '../../environments/environment';

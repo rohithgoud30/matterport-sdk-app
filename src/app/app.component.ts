@@ -1,26 +1,25 @@
-// src/app/app.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SpaceStateService } from './services/space-state.service';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatterportViewerComponent } from './matterport-viewer/matterport-viewer.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatterportViewerComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, MatterportViewerComponent],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-matterport';
-  inputSpaceId: string = '';
-  spaceId: string = '';
+  spaceId: string | null = null;
 
-  submitSpaceId() {
-    if (!this.inputSpaceId) {
-      alert('Space ID is mandatory. Please enter a valid Space ID.');
-    } else {
-      this.spaceId = this.inputSpaceId;
-    }
+  constructor(private spaceStateService: SpaceStateService) {}
+
+  ngOnInit() {
+    this.spaceStateService.currentSpaceId.subscribe((spaceId) => {
+      this.spaceId = spaceId;
+    });
   }
 }

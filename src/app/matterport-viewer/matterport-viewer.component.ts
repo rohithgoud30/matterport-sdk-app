@@ -1,39 +1,41 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  Renderer2,
-  ElementRef,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { MatterportService } from '../services/matterport.service';
+import { SpaceStateService } from '../services/space-state.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-matterport-viewer',
   templateUrl: './matterport-viewer.component.html',
   styleUrls: ['./matterport-viewer.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [FormsModule, CommonModule, RouterModule],
 })
-export class MatterportViewerComponent implements OnInit, OnChanges {
+export class MatterportViewerComponent implements OnInit {
   @Input() spaceId: string = '';
+  inputSpaceId: string = '';
+  iframeLoaded: boolean = false;
   errorMessage: string | null = null;
 
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
-    private matterportService: MatterportService
+    private matterportService: MatterportService,
+    private spaceStateService: SpaceStateService
   ) {}
 
-  async ngOnInit() {
-    await this.initializeViewer();
-  }
-
-  async ngOnChanges(changes: SimpleChanges) {
-    if (changes['spaceId'] && !changes['spaceId'].isFirstChange()) {
-      await this.initializeViewer();
+  ngOnInit() {
+    if (this.spaceId) {
+      this.inputSpaceId = this.spaceId;
+      this.initializeViewer();
+    } else {
+      const savedSpaceId = this.spaceStateService.getSpaceId();
+      if (savedSpaceId) {
+        this.inputSpaceId = savedSpaceId;
+        this.spaceId = savedSpaceId;
+        this.initializeViewer();
+      }
     }
   }
 
@@ -55,12 +57,41 @@ export class MatterportViewerComponent implements OnInit, OnChanges {
         this.showError(error);
       } else if (!sdk) {
         this.showError('Unknown error initializing Matterport SDK');
+      } else {
+        const iframe = this.el.nativeElement
+          .querySelector(container)
+          .querySelector('iframe');
+        if (iframe) {
+          this.renderer.listen(iframe, 'load', () => {
+            this.iframeLoaded = true;
+            this.renderer.setStyle(iframe, 'width', '100%');
+            this.renderer.setStyle(iframe, 'height', '100%');
+          });
+        }
       }
     } catch (error: any) {
       this.showError(
         'Error initializing Matterport SDK: ' + (error?.message || error)
       );
     }
+  }
+
+  submitSpaceId() {
+    if (!this.inputSpaceId) {
+      this.showError('Space ID is mandatory');
+    } else {
+      this.spaceId = this.inputSpaceId;
+      this.spaceStateService.setSpaceId(this.spaceId); // Save the spaceId to the shared service
+      this.initializeViewer(); // Initialize viewer after setting the space ID
+    }
+  }
+
+  resetSpaceId() {
+    this.spaceId = '';
+    this.inputSpaceId = '';
+    this.spaceStateService.resetSpaceId(); // Remove the spaceId from the shared service
+    this.clearViewer();
+    this.showError('Space ID is mandatory');
   }
 
   showError(message: string) {

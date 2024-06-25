@@ -1,0 +1,15 @@
+{
+  "spaces": [
+    {
+      "id": 1,
+      "name": "Example Store",
+      "city": "Example City",
+      "state": "Example State",
+      "spaceId": "ExampleSpaceID",
+      "products": [
+        { "name": "Product 1", "tags": "Tag1" },
+        { "name": "Product 2", "tags": "Tag2" }
+      ]
+    }
+  ]
+}

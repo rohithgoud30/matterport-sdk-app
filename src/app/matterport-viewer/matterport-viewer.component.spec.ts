@@ -8,9 +8,8 @@ describe('MatterportViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatterportViewerComponent]
-    })
-    .compileComponents();
+      imports: [MatterportViewerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MatterportViewerComponent);
     component = fixture.componentInstance;

@@ -1,0 +1,15 @@
+<div class="content">
+  <h2>Add/Edit Product</h2>
+  <form (ngSubmit)="saveProduct()">
+    <label for="name">Product Name:</label>
+    <input id="name" [(ngModel)]="product.name" name="name" required />
+
+    <label for="tags">Tags:</label>
+    <input id="tags" [(ngModel)]="product.tags" name="tags" required />
+
+    <label for="spaceId">Space ID:</label>
+    <input id="spaceId" [(ngModel)]="product.spaceId" name="spaceId" required />
+
+    <button type="submit">Save</button>
+  </form>
+</div>

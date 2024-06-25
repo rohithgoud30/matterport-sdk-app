@@ -1,2 +1,22 @@
-<!-- src/app/matterport-viewer/matterport-viewer.component.html -->
-<div id="matterport-container" class="matterport-viewer"></div>
+<div class="container">
+  <main class="main">
+    <div class="input-container">
+      <label for="spaceId">Space ID:</label>
+      <input
+        id="spaceId"
+        [(ngModel)]="inputSpaceId"
+        placeholder="Enter Space ID"
+      />
+      <button (click)="submitSpaceId()">Load</button>
+      <button (click)="resetSpaceId()">Reset</button>
+    </div>
+    <div class="viewer-container">
+      <div id="matterport-container" class="matterport-viewer"></div>
+    </div>
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+  </main>
+
+  <aside class="side-component">
+    <router-outlet name="side"></router-outlet>
+  </aside>
+</div>

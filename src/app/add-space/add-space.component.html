@@ -1,0 +1,18 @@
+<div class="content">
+  <h2>Add Space</h2>
+  <form (ngSubmit)="saveSpace()">
+    <label for="name">Name of Store:</label>
+    <input id="name" [(ngModel)]="space.name" name="name" required />
+
+    <label for="city">City:</label>
+    <input id="city" [(ngModel)]="space.city" name="city" required />
+
+    <label for="state">State:</label>
+    <input id="state" [(ngModel)]="space.state" name="state" required />
+
+    <label for="spaceId">Space ID:</label>
+    <input id="spaceId" [(ngModel)]="space.spaceId" name="spaceId" required />
+
+    <button type="submit">Save</button>
+  </form>
+</div>

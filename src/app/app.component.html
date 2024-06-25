@@ -1,15 +1,17 @@
-<!-- src/app/app.component.html -->
-<main class="main">
-  <div class="input-container">
-    <label for="spaceId">Space ID:</label>
-    <input
-      id="spaceId"
-      [(ngModel)]="inputSpaceId"
-      placeholder="Enter Space ID"
+<nav>
+  <div class="brand">
+    <img
+      src="https://staging.zroin.com/assets/images/zroin_logo.png"
+      alt="Logo"
+      class="logo"
     />
-    <button (click)="submitSpaceId()">Submit</button>
   </div>
-  <div class="viewer-container">
-    <app-matterport-viewer [spaceId]="spaceId"></app-matterport-viewer>
+  <div class="nav-links">
+    <a routerLink="/view-space" routerLinkActive="active">View Space</a>
+    <a routerLink="/add-space" routerLinkActive="active">Add Space</a>
+    <a routerLink="/edit-product" routerLinkActive="active">Edit Product</a>
   </div>
-</main>
+</nav>
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>
