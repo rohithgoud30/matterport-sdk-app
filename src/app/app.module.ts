@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AddSpaceComponent } from './add-space/add-space.component';
-import { EditProductComponent } from './edit-product/edit-product.component';
+import { AddOrEditProductComponent } from './add-or-edit-product/add-or-edit-product.component';
 import { ViewSpaceComponent } from './view-space/view-space.component';
 import { MatterportViewerComponent } from './matterport-viewer/matterport-viewer.component';
 import { routes } from './app.routes';
@@ -19,7 +19,7 @@ import { routes } from './app.routes';
     FormsModule,
     RouterModule.forRoot(routes),
     AddSpaceComponent,
-    EditProductComponent,
+    AddOrEditProductComponent,
     ViewSpaceComponent,
     MatterportViewerComponent,
   ],

@@ -6,10 +6,29 @@
       class="logo"
     />
   </div>
-  <div class="nav-links">
-    <a routerLink="/view-space" routerLinkActive="active">View Space</a>
-    <a routerLink="/add-space" routerLinkActive="active">Add Space</a>
-    <a routerLink="/edit-product" routerLinkActive="active">Edit Product</a>
+  <div
+    class="hamburger-menu"
+    [class.change]="menuOpen"
+    [class.gap]="menuOpen"
+    (click)="toggleMenu()"
+  >
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+  </div>
+  <div class="nav-links" [class.open]="menuOpen || !isSmallScreen">
+    <a routerLink="/view-space" routerLinkActive="active" (click)="closeMenu()"
+      >View Space</a
+    >
+    <a routerLink="/add-space" routerLinkActive="active" (click)="closeMenu()"
+      >Add Space</a
+    >
+    <a
+      routerLink="/add-or-edit-product"
+      routerLinkActive="active"
+      (click)="closeMenu()"
+      >Add/Edit Product</a
+    >
   </div>
 </nav>
 <div class="content-container">
