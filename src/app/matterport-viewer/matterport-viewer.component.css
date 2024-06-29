@@ -71,16 +71,6 @@
   flex-shrink: 0; /* Prevent button from shrinking */
 }
 
-/* Container to hold the main and side components */
-.container {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden; /* Prevent overflow */
-  box-sizing: border-box;
-}
-
 /* Side component taking up 25% width */
 .side-component {
   flex: 0 0 25%;
